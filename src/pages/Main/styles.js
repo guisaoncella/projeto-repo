@@ -1,5 +1,27 @@
 import styled, {keyframes, css} from "styled-components";
 
+export const List = styled.ul`
+    list-style: none;
+    margin-top: 20px;
+
+    li{
+        padding: 15px 0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        
+        & + li{
+            border-top: 1px solid #eee;
+        }
+
+        a{
+            color: #0D2636;
+            text-decoration: none;
+        }
+    }
+`;
+
 export const Container = styled.div`
     max-width: 700px;
     background: #FFF;
@@ -73,8 +95,4 @@ const animate = keyframes`
     to{
         transform: rotate(360deg);
     }
-`;
-
-export const List = styled.ul`
-
 `;
