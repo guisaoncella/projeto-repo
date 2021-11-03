@@ -5,6 +5,7 @@ export const List = styled.ul`
     margin-top: 20px;
 
     li{
+        font-size: 16px;
         padding: 15px 0;
         display: flex;
         flex-direction: row;
@@ -55,6 +56,18 @@ export const Form = styled.form`
     }
 `;
 
+export const DeleteButton = styled.button.attrs({
+    type: 'button'
+})`
+    margin-left: 5px;
+    background: transparent;
+    color: #0D2636;
+    border: 0;
+    padding: 8px;
+    outline: 0;
+    border-radius: 5px;
+`;
+
 export const SubmitButton = styled.button.attrs(props => ({
     type: 'submit',
     disabled: props.loading,
@@ -96,3 +109,4 @@ const animate = keyframes`
         transform: rotate(360deg);
     }
 `;
+
