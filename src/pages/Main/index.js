@@ -29,6 +29,11 @@ export default function Main(){
         submit()
     }, [newRepo, repositorios])
 
+    const handleDelete = useCallback((repo) => {
+        const find = repositorios.filter(r => r.name !== repo)
+        setRepositorios(find)
+    }, [repositorios])
+
     return(
         <Container>
             <h1>
@@ -52,7 +57,7 @@ export default function Main(){
                {repositorios.map(repo => (
                     <li key={repo.name}>
                         <span>
-                            <DeleteButton onClick={() => {}}>
+                            <DeleteButton onClick={() => handleDelete(repo.name)}>
                                 <FaTrash size={14} />    
                             </DeleteButton>  
                             {repo.name}
