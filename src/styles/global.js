@@ -22,7 +22,8 @@ export default createGlobalStyle`
     }
 
     body{
-        background: ${cores.main_bg};
+        background: rgb(37,59,74);
+        background: linear-gradient(180deg, rgba(37,59,74,1) 0%, rgba(13,38,54,1) 50%, rgba(10,30,43,1) 100%);
         font-size: ${tamanhos.main_font};
         -webkit-font-smoothing: antialiased !important;
     }
