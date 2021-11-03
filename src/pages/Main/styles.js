@@ -74,3 +74,7 @@ const animate = keyframes`
         transform: rotate(360deg);
     }
 `;
+
+export const List = styled.ul`
+
+`;
