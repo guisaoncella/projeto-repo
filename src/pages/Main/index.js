@@ -7,7 +7,7 @@ export default function Main(){
     const [newRepo, setNewRepo] = useState('')
     const [repositorios, setRepositorios] = useState([])
     const [loading, setLoading] = useState(false)
-    const [alert, setAlert] = useState(false);
+    const [alert, setAlert] = useState('');
 
     //buscar lista quando iniciar
     useEffect(() => {
@@ -25,7 +25,7 @@ export default function Main(){
     const handleSubmit = useCallback((e) => {
         e.preventDefault()
         setLoading(true)
-        setAlert(false);
+        setAlert('');
         async function submit(){
             try{
                 if(newRepo === ''){
@@ -45,7 +45,7 @@ export default function Main(){
                 setNewRepo('')
             }catch(error){
                 console.log(error);
-                setAlert(true);
+                setAlert(error.message);
             }finally{
                 setLoading(false)
             }
@@ -66,18 +66,21 @@ export default function Main(){
             </h1>
 
             <Form onSubmit={handleSubmit} error={alert}>
-                <input type="text" placeholder="Adicionar Repositórios" value={newRepo} onChange={e => {
-                    setAlert(false);
-                    setNewRepo(e.target.value);}} />
+                <div>
+                    <input type="text" placeholder="Adicionar Repositórios" value={newRepo} onChange={e => {
+                        setAlert('');
+                        setNewRepo(e.target.value);}} />
 
-                <SubmitButton loading={loading ? 1 : 0}>
-                    {loading ? (
-                        <FaSpinner color="#FFF" size={14} />
-                    ): (
-                        <FaPlus color="#FFF" size={14} />
-                    )}
-                    
-                </SubmitButton>
+                    <SubmitButton loading={loading ? 1 : 0}>
+                        {loading ? (
+                            <FaSpinner color="#FFF" size={14} />
+                        ): (
+                            <FaPlus color="#FFF" size={14} />
+                        )}
+                        
+                    </SubmitButton>
+                </div>
+                <label>{alert}</label>
             </Form>
             <List>
                {repositorios.map(repo => (

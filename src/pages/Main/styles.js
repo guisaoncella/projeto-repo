@@ -43,9 +43,13 @@ export const Container = styled.div`
 `;
 
 export const Form = styled.form`
+    div{
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 2px;
+    }
     margin-top: 30px;
-    display: flex;
-    flex-direction: row;
+    
 
     input{
         flex: 1;
@@ -53,6 +57,14 @@ export const Form = styled.form`
         padding: 10px 15px;
         border-radius: 5px;
         font-size: 16px;
+    }
+
+    label{
+        margin-left: 20px;
+        font-size: 12px;   
+        font-weight: 600;
+        color: #FF0000;
+        opacity: 0.8;
     }
 `;
 
