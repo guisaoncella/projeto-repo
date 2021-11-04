@@ -9,6 +9,18 @@ export default function Main(){
     const [loading, setLoading] = useState(false)
     const [alert, setAlert] = useState(false);
 
+    //buscar lista quando iniciar
+    useEffect(() => {
+        const repoStorage = localStorage.getItem('repos');
+        if(repoStorage){
+            setRepositorios(JSON.parse(repoStorage));
+        }
+    }, []);
+
+    //salvar lista
+    useEffect(() => {
+        localStorage.setItem('repos', JSON.stringify(repositorios));
+    }, [repositorios]);
 
     const handleSubmit = useCallback((e) => {
         e.preventDefault()
@@ -32,8 +44,8 @@ export default function Main(){
                 setRepositorios([...repositorios, data])
                 setNewRepo('')
             }catch(error){
+                console.log(error);
                 setAlert(true);
-                console.log(error)
             }finally{
                 setLoading(false)
             }
