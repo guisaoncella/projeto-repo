@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { Container, Owner, Loading, BackButton, IssuesList } from './styles';
+import { Container, Owner, Loading, BackButton, IssuesList, PageActions } from './styles';
 import { FaArrowLeft } from 'react-icons/fa';
 import api from '../../services/api'
 
@@ -59,6 +59,10 @@ export default function Repositorio({match}){
                     </li>
                 ))}
             </IssuesList>
+            <PageActions>
+                <button type="button" onClick={() => {}}>Voltar</button>
+                <button type="button" onClick={() => {}}>Avançar</button>
+            </PageActions>
         </Container>
     )
 }
