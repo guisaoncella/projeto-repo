@@ -58,5 +58,64 @@ export const BackButton = styled(Link)`
 `;
 
 export const IssuesList = styled.ul`
+    margin-top: 30px;
+    padding-top: 50px;
+    border-top: 1px solid #DDD;
+    list-style: none;
 
+
+    li{
+        display: flex;
+        padding: 10px 0px;
+        border-bottom: 1px solid #DDD;
+
+        & + li{
+            margin-top: 40px;
+        }
+
+        img{
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            border: 2px solid #0D2636;
+        }
+
+        div{
+            flex: 1;
+            margin-left: 12px;
+            a{
+                font-size: 16px;
+                font-weight: 600;
+                text-decoration: none;
+                color: #16537e;
+                transition: all 0.3s;
+                margin-bottom: 100px;
+            }
+            a:hover{
+                color: #2986cc;
+                text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+            } 
+            
+            span{
+                display: inline-block;
+                background: #222;
+                color: #FFF;
+                border-radius: 5px;
+                font-size: 12px;
+                font-weight: 600;
+                padding: 5px 7px;
+                margin-left: 5px;
+                margin-top: 10px;
+                word-break: keep-all;
+            }
+
+            p{
+                margin-top: 10px;
+                font-size: 14px;
+                font-weight: bold;
+                color: #000;
+            }
+        }
+    }
 `;

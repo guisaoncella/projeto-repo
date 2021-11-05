@@ -49,13 +49,12 @@ export default function Repositorio({match}){
                     <li key={String(issues.id)}>
                         <img src={issues.user.avatar_url} alt={issues.user.login} />
                         <div>
-                            <strong>
-                                <a href={issues.html_url}>{issues.title}</a>
-                                {issues.labels.map(label => (
+                            <a href={issues.html_url} target="_blank">{issues.title}</a>
+                            
+                            {issues.labels.map(label => (
                                     <span key={String(label.id)}>{label.name}</span>
                                 ))}
-                            </strong>
-                            <p>{issues.user.login}</p>
+                            <p>Autor: {issues.user.login}</p>
                         </div>
                     </li>
                 ))}
