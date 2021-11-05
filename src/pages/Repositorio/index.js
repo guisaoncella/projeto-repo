@@ -6,7 +6,8 @@ import api from '../../services/api'
 export default function Repositorio({match}){
     const [repositorio, setRepositorio] = useState({});
     const [issues, setIssues] = useState([]);
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(true);
+    const [page, setPage] = useState(1);
 
     useEffect(() => {
         async function load(){
@@ -28,10 +29,32 @@ export default function Repositorio({match}){
         load();
     }, [match.params.repositorio]);
 
+    useEffect(() => {
+        async function loadIssue(){
+            const nomeRepo = decodeURIComponent(match.params.repositorio);
+            const response = await api.get(`/repos/${nomeRepo}/issues`, {params: {
+                state: 'open',
+                per_page: 5,
+                page
+            }})
+            setIssues(response.data);
+        }
+        loadIssue()
+    }, [match.params.repositorio, page]);
+
     if(loading){
         return(
             <Loading/> 
         )
+    }
+
+    function handlePage(it){
+        let pagina = page + it;
+        if(pagina == 0){
+            setPage(1);
+        }else{
+            setPage(pagina);
+        }      
     }
 
     return(
@@ -60,8 +83,8 @@ export default function Repositorio({match}){
                 ))}
             </IssuesList>
             <PageActions>
-                <button type="button" onClick={() => {}}>Voltar</button>
-                <button type="button" onClick={() => {}}>Avançar</button>
+                <button type="button" onClick={() => handlePage(-1)} disabled={page < 2} >Voltar</button>
+                <button type="button" onClick={() => handlePage(1)}>Avançar</button>
             </PageActions>
         </Container>
     )

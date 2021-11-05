@@ -138,6 +138,10 @@ export const PageActions = styled.div`
         :hover{
             background: #444;
         }
+        &:disabled{
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
     }
     
 `;
