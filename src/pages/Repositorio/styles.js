@@ -56,3 +56,7 @@ export const BackButton = styled(Link)`
         transition: border 0.2s;
     }
 `;
+
+export const IssuesList = styled.ul`
+
+`;

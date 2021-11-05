@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { Container, Owner, Loading, BackButton } from './styles';
+import { Container, Owner, Loading, BackButton, IssuesList } from './styles';
 import { FaArrowLeft } from 'react-icons/fa';
 import api from '../../services/api'
 
@@ -21,7 +21,7 @@ export default function Repositorio({match}){
             ])
 
             setRepositorio(repoData.data);
-            setIssues(issues.data);
+            setIssues(issuesData.data);
             setLoading(false);
         }
 
@@ -36,14 +36,30 @@ export default function Repositorio({match}){
 
     return(
         <Container>
+            <BackButton to="/">
+                <FaArrowLeft color="#000" size={50} />
+            </BackButton>
             <Owner>
                 <img src={repositorio.owner.avatar_url} alt={repositorio.owner.login} />
                 <h1>{repositorio.name}</h1>
                 <p>{repositorio.description}</p>   
             </Owner>
-            <BackButton to="/">
-                <FaArrowLeft color="#000" size={50} />
-            </BackButton>
+            <IssuesList>
+                {issues.map(issues => (
+                    <li key={String(issues.id)}>
+                        <img src={issues.user.avatar_url} alt={issues.user.login} />
+                        <div>
+                            <strong>
+                                <a href={issues.html_url}>{issues.title}</a>
+                                {issues.labels.map(label => (
+                                    <span key={String(label.id)}>{label.name}</span>
+                                ))}
+                            </strong>
+                            <p>{issues.user.login}</p>
+                        </div>
+                    </li>
+                ))}
+            </IssuesList>
         </Container>
     )
 }
