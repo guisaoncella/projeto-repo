@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { Container, Owner, Loading, BackButton, IssuesList, PageActions } from './styles';
+import { Container, Owner, Loading, BackButton, IssuesList, PageActions} from './styles';
 import { FaArrowLeft } from 'react-icons/fa';
 import api from '../../services/api'
 
@@ -8,6 +8,7 @@ export default function Repositorio({match}){
     const [issues, setIssues] = useState([]);
     const [loading, setLoading] = useState(true);
     const [page, setPage] = useState(1);
+    const [filter, setFilter] = useState('open');
 
     useEffect(() => {
         async function load(){
@@ -33,14 +34,14 @@ export default function Repositorio({match}){
         async function loadIssue(){
             const nomeRepo = decodeURIComponent(match.params.repositorio);
             const response = await api.get(`/repos/${nomeRepo}/issues`, {params: {
-                state: 'open',
+                state: filter,
                 per_page: 5,
                 page
             }})
             setIssues(response.data);
         }
         loadIssue()
-    }, [match.params.repositorio, page]);
+    }, [match.params.repositorio, page, filter]);
 
     if(loading){
         return(
@@ -57,6 +58,11 @@ export default function Repositorio({match}){
         }      
     }
 
+    function handleFilter(filtro){
+        setFilter(filtro);
+        setPage(1);
+    }
+
     return(
         <Container>
             <BackButton to="/">
@@ -67,6 +73,11 @@ export default function Repositorio({match}){
                 <h1>{repositorio.name}</h1>
                 <p>{repositorio.description}</p>   
             </Owner>
+            <PageActions>
+                <button type="button" onClick={() => handleFilter('all')} disabled={filter === 'all'}>ALL</button>
+                <button type="button" onClick={() => handleFilter('open')} disabled={filter === 'open'}>OPEN</button>    
+                <button type="button" onClick={() => handleFilter('closed')} disabled={filter === 'closed'}>CLOSED</button>    
+            </PageActions>
             <IssuesList>
                 {issues.map(issues => (
                     <li key={String(issues.id)}>
